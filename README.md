@@ -34,11 +34,17 @@ runs its test suite.
 
 ## Deploy daonetes program
 
-The daonetes (worknet) program can function independently, but the CLI depends
+The daonetes (worknet) program can function independently, but the CLI ~~depends
 on [Goki](https://goki.so) for smart wallet support (multisig) so that multiple
 users can access the same cluster. That requires Goki program to be present for
-local development. [Amman](https://github.com/metaplex-foundation/amman) is used
-for this. It can also start a validator with the worknet program .so once that
+local development.~~ 2023 edit: The Macaroni brothers are fuckboys, therefore we 
+can't have nice things. If designing now, we would probably use [Squads](https://squads.so/),
+however there is also support for doing group based things, albeit in a clunky way, with the built in
+SPL Governance Program (Realms) supported by the front end. Still, it's a bummer the 
+git-like workflow from before that used Goki is no longer supported.
+
+[Amman](https://github.com/metaplex-foundation/amman) is used
+for dependencies. It can also start a validator with the worknet program .so once that
 program has been built.
 
 To install Amman:
