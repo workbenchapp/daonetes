@@ -1,36 +1,43 @@
-# Run
+# DAOnetes
 
-You may want to tell the solana cli to use your local validator, or devnet/testnet..
+DAOnetes is an innovative solution designed to tackle the prevalent issues in modern computing that stem from dependency on monolithic architectures and centralized cloud providers. By leveraging blockchain technology, DAOnetes creates a decentralized computing platform, shifting the focus from infrastructure to application development and business logic.
 
-`solana config set --url http://localhost:8899`
+**Problems Addressed**
 
-You need to have an account with sufficient SOL (2.05891416 SOL) to deploy lib.rs into the validator
+- **Vendor Lock-in**: DAOnetes mitigates the leverage that large cloud vendors have on their customers by abstracting away the implementation details of where workloads are run, a concept known as fungible workloads, providing a vendor-neutral environment inspired by technologies such as Docker and serverless computing.
 
-```
-yarn
-solana-keygen new -o ~/.config/solana/id.json   <<<<USE Solana-Workbench and use its wallet account..., then use `solana-keygen recover -o ~/.config/solana/id.json  ASK` and enter the mnemonic phrase for the ElectronAppStorageKeypair private key in `~/.config/SolanaWorkbench/electron-cfg.json`>>>>
-solana airdrop 666 $(solana address)
-solana balance $(solana address)
-anchor build
-anchor deploy
-```
+- **Edge Computing**: DAOnetes addresses the growing need for location-sensitive computing by allowing workloads to run where the data exists, rather than transferring data to centralized computing locations. This increases consistency across diverse environments and reduces bandwidth constraints.
 
-To run the Anchor tests, the secret key JSON for a wallet that holds license
-tokens on devnet must be set in the `WORKNET_TEST_PAYER` environment variable.
+- **Auditability**: DAOnetes enhances security and control by enabling fungible use of resources, providing better visibility, auditability, and control than traditional computing models.
 
-e.g.:
+**Blockchain-enabled Fungible Computing**
 
-```
-WORKNET_TEST_PAYER=$(cat ~/worknet_test_payer.json) anchor test
-```
+DAOnetes employs modern blockchain systems to facilitate portable computing. Key aspects include:
 
-Anchor clones accounts for the license token mint and a license token account
-(i.e., the token account held by the key inserted above) from devnet when it
-runs its test suite.
+- **Neutral Data Storage**: Blockchain eliminates the need for centralized or proprietary systems for device discovery and data storage.
+- **Identity Solution**: DAOnetes uses signed transactions, allowing users to cryptographically approve operations and validate permissions without a centralized identity provider.
+- **Auditing and Tracking**: The blockchain ledger provides a comprehensive record of all operations, facilitating visibility into Shadow IT.
 
-> > NOTE: at this point, you can "Add Account" in Solana workbench (tho it didn't show in my live view?)
+**System Architecture**
 
-# Using Daonetes
+DAOnetes (DAO + Container Solution) is a system that networks computers together for running workloads. The system allows runtime environments to join a workgroup, which is managed by a central authority. This authority can be an individual user key or an address representing a group of keys (e.g., a DAO or multisig authority). It is responsible for adding workload specifications, approving devices to be part of the group, and scheduling workloads onto specific devices.
+
+DAOnetes supports multiple signers in a shared identity system, ensuring that multiple keys sign off on critical operations. This portable identity system, combined with the reproducibility of Docker images and serverless, paves the way for truly fungible workloads. This gives users the flexibility to operate beyond the constraints of a specific cloud, identity provider, or orchestration engine.
+
+In short, the components are:
+
+1. Smart contract (Solana program)
+2. Signal server for VPN
+3. Go-based agents running on worknet devices
+
+![](/daoctl/docs/worknet_architecture.png?raw=true)
+
+**Private P2P Networking**
+
+DAOnetes enables private peer-to-peer WireGuard networking, opening new possibilities compared to existing blockchain computing solutions like Akash and Golem. Users can establish their own "work groups", enhancing privacy and control over their computing environments.
+
+
+
 
 ## Deploy daonetes program
 
@@ -62,10 +69,38 @@ $ amman start
 
 This requires internet access on the first run. Amman will clone Goki locally
 from mainnet.
+You may want to tell the solana cli to use your local validator, or devnet/testnet..
 
-## Worknet Architecture
+`solana config set --url http://localhost:8899`
 
-![](/daoctl/docs/worknet_architecture.png?raw=true)
+You need to have an account with sufficient SOL (2.05891416 SOL) to deploy lib.rs into the validator
+
+```
+yarn
+solana-keygen new -o ~/.config/solana/id.json   <<<<USE Solana-Workbench and use its wallet account..., then use `solana-keygen recover -o ~/.config/solana/id.json  ASK` and enter the mnemonic phrase for the ElectronAppStorageKeypair private key in `~/.config/SolanaWorkbench/electron-cfg.json`>>>>
+solana airdrop 666 $(solana address)
+solana balance $(solana address)
+anchor build
+anchor deploy
+```
+
+To run the Anchor tests, the secret key JSON for a wallet that holds license
+tokens on devnet must be set in the `WORKNET_TEST_PAYER` environment variable.
+
+Yup, it's jank af and hardcoded to things that have only been available to 
+the creators. We definitely welcome any PRs to make it work generically.
+
+e.g.:
+
+```
+WORKNET_TEST_PAYER=$(cat ~/worknet_test_payer.json) anchor test
+```
+
+Anchor clones accounts for the license token mint and a license token account
+(i.e., the token account held by the key inserted above) from devnet when it
+runs its test suite.
+
+> > NOTE: at this point, you can "Add Account" in Solana workbench (tho it didn't show in my live view?)
 
 ## Creating a cluster and adding machines
 
@@ -115,6 +150,8 @@ PDA refers to the device data account
 AUTHORITY refers to the device's unique key
 
 ## Adding specs and deploying them
+
+(NOTE: Currently due to migration to Realms instead of Goki the CRUD operations on CLI are broken. You must use the web UI)
 
 Now, to deploy. From the 'control node', first you must create and name a spec. There is limited support for understanding Docker Compose files (volumes, port mappings, container image). There is an example nginx compose file in the repo:
 
