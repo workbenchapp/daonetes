@@ -1,26 +1,18 @@
 # DAOnetes
 
-DAOnetes is an innovative solution designed to tackle the prevalent issues in modern computing that stem from dependency on monolithic architectures and centralized cloud providers. By leveraging blockchain technology, DAOnetes creates a decentralized computing platform, shifting the focus from infrastructure to application development and business logic.
+DAOnetes is a novel solution designed to tackle the prevalent issues in modern computing that stem from dependency on monolithic architectures and centralized cloud providers. By leveraging blockchain technology (Solana), DAOnetes creates a decentralized computing platform, enabling peer to peer computing with a built-in cryptographic identity and group system.
 
 **Problems Addressed**
 
-- **Vendor Lock-in**: DAOnetes mitigates the leverage that large cloud vendors have on their customers by abstracting away the implementation details of where workloads are run, a concept known as fungible workloads, providing a vendor-neutral environment inspired by technologies such as Docker and serverless computing.
+- **Vendor Lock-in**: DAOnetes mitigates the leverage that large cloud vendors have on their customers by abstracting away the implementation details of where workloads are run, a concept known as fungible workloads, providing a vendor-neutral environment inspired by and leveraging technologies such as Docker and serverless computing.
 
-- **Edge Computing**: DAOnetes addresses the growing need for location-sensitive computing by allowing workloads to run where the data exists, rather than transferring data to centralized computing locations. This increases consistency across diverse environments and reduces bandwidth constraints.
+- **Edge Computing**: DAOnetes addresses the growing need for location-sensitive computing by enabling users to port their cryptographic ID to local "foreign" nodes, allowing workloads to run where the data exists, rather than transferring data to centralized computing locations. This increases consistency across diverse environments and reduces bandwidth constraints.
 
 - **Auditability**: DAOnetes enhances security and control by enabling fungible use of resources, providing better visibility, auditability, and control than traditional computing models.
 
-**Blockchain-enabled Fungible Computing**
+**Architecture**
 
-DAOnetes employs modern blockchain systems to facilitate portable computing. Key aspects include:
-
-- **Neutral Data Storage**: Blockchain eliminates the need for centralized or proprietary systems for device discovery and data storage.
-- **Identity Solution**: DAOnetes uses signed transactions, allowing users to cryptographically approve operations and validate permissions without a centralized identity provider.
-- **Auditing and Tracking**: The blockchain ledger provides a comprehensive record of all operations, facilitating visibility into Shadow IT.
-
-**System Architecture**
-
-DAOnetes (DAO + Container Solution) is a system that networks computers together for running workloads. The system allows runtime environments to join a workgroup, which is managed by a central authority. This authority can be an individual user key or an address representing a group of keys (e.g., a DAO or multisig authority). It is responsible for adding workload specifications, approving devices to be part of the group, and scheduling workloads onto specific devices.
+DAOnetes (Decentralized Autonomous Organization + Kubernetes) is a system that networks computers together for running workloads. The system allows runtime environments to join a workgroup, which is managed by an authority tracked in a smart contract. This authority can be an individual user key or an address representing a group of keys (e.g., a DAO or multisig authority). It is responsible for adding workload specifications, approving devices to be part of the group, and scheduling workloads onto specific devices.
 
 DAOnetes supports multiple signers in a shared identity system, ensuring that multiple keys sign off on critical operations. This portable identity system, combined with the reproducibility of Docker images and serverless, paves the way for truly fungible workloads. This gives users the flexibility to operate beyond the constraints of a specific cloud, identity provider, or orchestration engine.
 
@@ -34,10 +26,15 @@ In short, the components are:
 
 **Private P2P Networking**
 
-DAOnetes enables private peer-to-peer WireGuard networking, opening new possibilities compared to existing blockchain computing solutions like Akash and Golem. Users can establish their own "work groups", enhancing privacy and control over their computing environments.
+DAOnetes enables private peer-to-peer WireGuard networking, opening new possibilities compared to existing blockchain computing solutions like Akash and Golem. Users can establish their own "work groups", enhancing privacy and control over their computing environments. **Instead of trading compute with randos on a big public network that anyone can see, private workload sharing and discovery is made possible, enabling use cases like passing secrets such as API keys or certificates to your workloads.**
 
+**Public Marketplace Model:**
 
+<img src="https://github.com/workbenchapp/daonetes/assets/1476820/d544c7f3-3776-4fc5-8a2f-c117329f902e"  width=250 />
 
+vs. **Private Workgroup Model:**
+
+<img src="https://github.com/workbenchapp/daonetes/assets/1476820/9f62e152-e7b4-4ec0-928e-78b7d74110bc" width=250 />
 
 ## Deploy daonetes program
 
