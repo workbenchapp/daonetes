@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  web:
+    image: nginx
+    volumes:
+    - ./templates:/etc/nginx/templates
+    ports:
+    - "8080:80"
+    environment:
+    - nginx_host=foobar.com
+    - nginx_port=80

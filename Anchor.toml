@@ -1,0 +1,27 @@
+[features]
+seeds = false
+
+[programs.localnet]
+worknet = "EdUCoDdRnT5HsQ2Ejy3TWMTQP8iUyMQB4WzoNh45pNX9"
+
+[programs.devnet]
+worknet = "EdUCoDdRnT5HsQ2Ejy3TWMTQP8iUyMQB4WzoNh45pNX9"
+
+[test.validator]
+url = "https://api.devnet.solana.com"
+
+[[test.validator.clone]]
+address = "3CrKoTYzfbeenzQmhXMQzHM929kioTvsr1JtDSX9uET5" # license token mint
+
+[[test.validator.clone]]
+address = "9RNxHPFffWYcnAf2BN521VzUmCFhXNGoMKm1BdrZ3JqE" # test key license token account
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

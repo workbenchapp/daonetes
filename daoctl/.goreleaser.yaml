@@ -1,0 +1,197 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod tidy
+    # you may remove this if you don't need go generate
+    # - go generate ./...
+project_name: daoctl
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      #- arm
+      - arm64
+#    ignore:
+#      - goos: freebsd
+#        goarch: arm
+#      - goos: linux
+#        goarch: arm
+    # Custom ldflags templates.
+    # Default is `-s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}} -X main.builtBy=goreleaser`.
+    ldflags:
+      - -s -w
+      - -X github.com/workbenchapp/worknet/daoctl/lib/version.versionString={{.Version}}
+      - -X github.com/workbenchapp/worknet/daoctl/lib/version.buildRevision={{.Commit}}
+      - -X github.com/workbenchapp/worknet/daoctl/lib/version.buildDate={{.Date}}
+      - -X github.com/workbenchapp/worknet/daoctl/lib/version.builtBy=goreleaser
+archives:
+  - format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: '{{ incpatch .Version }}-{{ .ShortCommit }}-devel'
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+# dockers:
+# - image_templates:
+#   - "daonetes/worknet:{{ .Version }}-amd64"
+#   use: buildx
+#   dockerfile: Dockerfile
+#   build_flag_templates:
+#   - "--pull"
+#   - "--label=org.opencontainers.image.created={{.Date}}"
+#   - "--label=org.opencontainers.image.title={{.ProjectName}}"
+#   - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+#   - "--label=org.opencontainers.image.version={{.Version}}"
+#   - "--platform=linux/amd64"
+# # - image_templates:
+# #   - "daonetes/worknet:{{ .Version }}-arm64v8"
+# #   use: buildx
+# #   goarch: arm64
+# #   dockerfile: Dockerfile
+# #   build_flag_templates:
+# #   - "--pull"
+# #   - "--label=org.opencontainers.image.created={{.Date}}"
+# #   - "--label=org.opencontainers.image.title={{.ProjectName}}"
+# #   - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+# #   - "--label=org.opencontainers.image.version={{.Version}}"
+# #   - "--platform=linux/arm64/v8"
+# docker_manifests:
+# - name_template: foo/bar:{{ .Version }}
+#   image_templates:
+#   - daonetes/worknet:{{ .Version }}-amd64
+#   # - daonetes/worknet:{{ .Version }}-arm64v8
+nfpms:
+  # note that this is an array of nfpm configs
+  - # ID of the nfpm config, must be unique.
+    # Defaults to "default".
+    id: daonetes
+
+    # Name of the package.
+    # Defaults to `ProjectName`.
+    package_name: daonetes
+
+    # You can change the file name of the package.
+    #
+    # Default:`{{ .PackageName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}`
+    file_name_template: "{{ .ConventionalFileName }}"
+
+    # Build IDs for the builds you want to create NFPM packages for.
+    # Defaults empty, which means no filtering.
+    # builds:
+    #   - foo
+    #   - bar
+
+    # Replacements for GOOS and GOARCH in the package name.
+    # Keys should be valid GOOSs or GOARCHs.
+    # Values are the respective replacements.
+    # Default is empty.
+    replacements:
+      amd64: 64-bit
+      386: 32-bit
+      darwin: macOS
+      linux: Tux
+
+    # Your app's vendor.
+    # Default is empty.
+    vendor: Cryptoworkbench Inc.
+
+    # Template to your app's homepage.
+    # Default is empty.
+    homepage: https://daonetes.com/
+
+    # Your app's maintainer (probably you).
+    # Default is empty.
+    maintainer: Sven Dowideit <sven@cryptoworkbench.io>
+
+    # Template to your app's description.
+    # Default is empty.
+    description: |-
+      daonetes.
+      A very distributed, decentralised multi-user mesh orchestration system
+
+    # Your app's license.
+    # Default is empty.
+    license: Private, limited for now.
+
+    # Formats to be generated.
+    formats:
+      - apk
+      - deb
+      - rpm
+
+    # Packages your package depends on.
+    dependencies:
+      - git
+      - docker-ce
+
+    # Packages your package recommends installing.
+    # recommends:
+    #   - bzr
+    #   - gtk
+
+    # Packages your package suggests installing.
+    # suggests:
+    #   - cvs
+    #   - ksh
+
+    # Packages that conflict with your package.
+    # conflicts:
+    #   - svn
+    #   - bash
+
+    # Packages it replaces.
+    # replaces:
+    #   - fish
+
+    # Template to the path that the binaries should be installed.
+    # Defaults to `/usr/bin`.
+    bindir: /usr/bin
+
+    # Version Epoch.
+    # Default is extracted from `version` if it is semver compatible.
+    epoch: 2
+
+    # Version Prerelease.
+    # Default is extracted from `version` if it is semver compatible.
+    #prerelease: beta1
+
+    # Version Metadata (previously deb.metadata).
+    # Default is extracted from `version` if it is semver compatible.
+    # Setting metadata might interfere with version comparisons depending on the packager.
+    #version_metadata: git
+
+    # Version Release.
+    release: 1
+
+    # Section.
+    section: default
+
+    # Priority.
+    priority: extra
+
+    # Makes a meta package - an empty package that contains only supporting files and dependencies.
+    # When set to `true`, the `builds` option is ignored.
+    # Defaults to false.
+    meta: false
+

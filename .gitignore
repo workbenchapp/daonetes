@@ -1,0 +1,11 @@
+
+.anchor
+.DS_Store
+target
+**/*.rs.bk
+node_modules
+test-ledger
+.amman/accounts/GokivDYuQXPZCWRkwMhdH2h91KpDQXBEmpgBgs55bnpH.json
+.amman/accounts/5k7J7X7XZmSHiosxf41uw5jz98NDTZeKpxaJhP1QquTy.json
+.amman/accounts/SvencSSSMANWBYyqFhMur1r7a3N6WAA1TEQNSEcRBnz.json
+.amman/accounts/HB2MDrejGMxWJLS4y91omh84dARLxCVS3hmRWkBPQSvu.json

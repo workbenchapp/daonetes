@@ -1,0 +1,109 @@
+@import url("//fonts.googleapis.com/css?family=Lato:normal,bold");
+@import url("//fonts.googleapis.com/css?family=Poppins:normal,bold");
+
+$font-family-sans-serif: "Lato", Helvetica Neue, Arial, sans-serif;
+$headings-font-family: "Poppins", Helvetica Neue, Arial, sans-serif;
+
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
+
+a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+}
+
+.gutter {
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
+    cursor: col-resize;
+}
+
+.paddingFromFooter {
+    padding-bottom: 100px;
+}
+
+.card-text pre {
+    overflow: scroll;
+    height: 10em;
+}
+
+/* <PublicKeyView publicKey={publickey} /> */
+code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    color: rgb(36, 41, 47);
+    background-color: rgba(175, 184, 193, 0.2);
+    border-radius: 6px;
+}
+
+pre {
+    background-color: rgba(175, 184, 193, 0.2);
+
+    code {
+        background: none;
+    }
+}
+
+.card {
+    overflow: hidden;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+:root {
+    --toastify-color-progress-light: linear-gradient(to right,
+            #736098,
+            #3ab6c1);
+}
+
+.wallet-adapter-button-custom {
+    font-family: $font-family-sans-serif !important;
+    background-color: $gray-100 !important;
+    color: $secondary !important;
+    padding: 0px 13px !important;
+    font-weight: 500 !important;
+    border: 1px solid $gray-500 !important;
+
+    &:hover {
+        background-color: $gray-200 !important;
+    }
+}
+
+.node-list-table {
+    tbody tr {
+        border-top-width: 1px;
+        border-color: lightgray;
+    }
+
+    .node-service-list-table {
+        tr {
+            border-top-width: 0;
+            font-size: 85%;
+        }
+    }
+
+    .small {
+        tr {
+            font-size: 75%;
+        }
+    }
+}

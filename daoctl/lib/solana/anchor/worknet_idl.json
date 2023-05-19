@@ -1,0 +1,753 @@
+{
+  "version": "0.1.0",
+  "name": "worknet",
+  "instructions": [
+    {
+      "name": "createWorkGroup",
+      "accounts": [
+        {
+          "name": "groupAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "group",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "licenseMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "groupLicenseTokens",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "depositingLicenseTokens",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "identifier",
+          "type": "string"
+        },
+        {
+          "name": "signalServerUrl",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "closeWorkGroup",
+      "accounts": [
+        {
+          "name": "groupAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "group",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "licenseMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "groupLicenseTokens",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "withdrawingLicenseTokens",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "force",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "registerDevice",
+      "accounts": [
+        {
+          "name": "groupAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "device",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "licenseMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "groupLicenseTokens",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "workGroup",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "deviceAuthority",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "closeDevice",
+      "accounts": [
+        {
+          "name": "groupAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "device",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "workGroup",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "updateDevice",
+      "accounts": [
+        {
+          "name": "deviceAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "device",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "ipv4",
+          "type": {
+            "array": [
+              "u8",
+              4
+            ]
+          }
+        },
+        {
+          "name": "hostname",
+          "type": "string"
+        },
+        {
+          "name": "bump",
+          "type": "u8"
+        },
+        {
+          "name": "status",
+          "type": {
+            "defined": "DeviceStatus"
+          }
+        }
+      ]
+    },
+    {
+      "name": "createWorkSpec",
+      "accounts": [
+        {
+          "name": "groupAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "spec",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "workGroup",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "specName",
+          "type": "string"
+        },
+        {
+          "name": "workType",
+          "type": {
+            "defined": "WorkType"
+          }
+        },
+        {
+          "name": "urlOrContents",
+          "type": "string"
+        },
+        {
+          "name": "contentsSha256",
+          "type": "string"
+        },
+        {
+          "name": "metadataUrl",
+          "type": "string"
+        },
+        {
+          "name": "mutable",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "closeWorkSpec",
+      "accounts": [
+        {
+          "name": "groupAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "spec",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "workGroup",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "createDeployment",
+      "accounts": [
+        {
+          "name": "groupAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "deployment",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "spec",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "deploymentMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "deploymentTokens",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "workGroup",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "replicas",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "closeDeployment",
+      "accounts": [
+        {
+          "name": "groupAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "deployment",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "deploymentMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "deploymentTokens",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "workGroup",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "schedule",
+      "accounts": [
+        {
+          "name": "groupAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "workGroup",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "deployment",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "deploymentMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "deploymentTokens",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "device",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "deviceAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "deviceTokens",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "replicas",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "WorkSpec",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "workType",
+            "type": {
+              "defined": "WorkType"
+            }
+          },
+          {
+            "name": "createdAt",
+            "type": "u64"
+          },
+          {
+            "name": "modifiedAt",
+            "type": "u64"
+          },
+          {
+            "name": "urlOrContents",
+            "type": "string"
+          },
+          {
+            "name": "contentsSha256",
+            "type": "string"
+          },
+          {
+            "name": "metadataUrl",
+            "type": "string"
+          },
+          {
+            "name": "mutable",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Device",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ipv4",
+            "type": {
+              "array": [
+                "u8",
+                4
+              ]
+            }
+          },
+          {
+            "name": "hostname",
+            "type": "string"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": "DeviceStatus"
+            }
+          },
+          {
+            "name": "deviceAuthority",
+            "type": "publicKey"
+          },
+          {
+            "name": "workGroup",
+            "type": "publicKey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WorkGroup",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "groupAuthority",
+            "type": "publicKey"
+          },
+          {
+            "name": "specs",
+            "type": {
+              "vec": "publicKey"
+            }
+          },
+          {
+            "name": "devices",
+            "type": {
+              "vec": "publicKey"
+            }
+          },
+          {
+            "name": "deployments",
+            "type": {
+              "vec": "publicKey"
+            }
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "identifier",
+            "type": "string"
+          },
+          {
+            "name": "signalServerUrl",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Deployment",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "spec",
+            "type": "publicKey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "args",
+            "type": {
+              "vec": {
+                "defined": "DeploymentArg"
+              }
+            }
+          },
+          {
+            "name": "replicas",
+            "type": "u8"
+          },
+          {
+            "name": "selfBump",
+            "type": "u8"
+          },
+          {
+            "name": "mintBump",
+            "type": "u8"
+          },
+          {
+            "name": "tokensBump",
+            "type": "u8"
+          },
+          {
+            "name": "deploymentBump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "DeploymentArg",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "argName",
+            "type": "string"
+          },
+          {
+            "name": "argValue",
+            "type": "string"
+          },
+          {
+            "name": "argType",
+            "type": {
+              "defined": "DeploymentArgType"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "WorkType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "DockerCompose"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DeviceStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "RegistrationRequested"
+          },
+          {
+            "name": "Registered"
+          },
+          {
+            "name": "Delinquent"
+          },
+          {
+            "name": "Cordoned"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DeploymentArgType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "String"
+          },
+          {
+            "name": "Number"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InsufficentLicenseTokens",
+      "msg": "You do not have enough license tokens to perform this operation. Please deposit more"
+    },
+    {
+      "code": 6001,
+      "name": "InsuffientReplicaTokens",
+      "msg": "Not enough replica tokens in Deployment"
+    },
+    {
+      "code": 6002,
+      "name": "OrphanedSpecs",
+      "msg": "Closing this work group would orphan specs"
+    },
+    {
+      "code": 6003,
+      "name": "OrphanedDevices",
+      "msg": "Closing this work group would orphan devices"
+    },
+    {
+      "code": 6004,
+      "name": "OrphanedDeployments",
+      "msg": "Closing this work group would orphan deployments"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+
+
+FROM golang AS build
+
+WORKDIR /app
+COPY . /app/
+
+RUN go build -o /app/signal-server/main signal-server/main.go
+
+FROM ubuntu:latest
+
+# Yeah, this is ammusing...
+ENV PORT 8080
+EXPOSE 8080
+
+WORKDIR /app
+COPY --from=build /app/signal-server/main /app/signal-server
+RUN apt-get update && apt-get install -y ca-certificates
+
+CMD /app/signal-server
